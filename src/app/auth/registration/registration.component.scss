@@ -1,0 +1,68 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff8e1; // soft yellow background
+  }
+  
+  form {
+    background-color: white;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #4a4a4a;
+  }
+  
+  p {
+    margin: 0.5rem 0 0.25rem;
+    font-weight: bold;
+    color: #4a4a4a;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  button[type="submit"] {
+    background-color: #fdbb2d;
+    color: #4a4a4a;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover:enabled {
+      background-color: #f9a825;
+      color: white;
+    }
+  
+    &:disabled {
+      background-color: #e0e0e0;
+      cursor: not-allowed;
+    }
+  }
+  
+  div[ng-reflect-ng-if] {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  

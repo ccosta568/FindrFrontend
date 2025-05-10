@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="demo" *ngIf="events.length > 0">
+    <div class="demo__header"></div>
+    <div class="demo__content">
+      <div class="demo__card-cont">
+        <div class="demo__card" *ngIf="events[currentIndex]" (swipeleft)="nextEvent()" (swiperight)="nextEvent()">
+          <div class="demo__card__top">
+            <!-- Event Title -->
+            <div class="event-title">
+              {{ events[currentIndex].title }}
+            </div>
+  
+            <!-- Event Host -->
+            <div class="event-host">
+              {{ events[currentIndex].host }}
+            </div>
+  
+            <!-- Event Date -->
+            <div class="event-datetime">
+              <span class="event-date">{{ events[currentIndex].date }} &#64; </span>
+              <span class="event-time">{{ events[currentIndex].time }}</span>
+            </div>
+  
+            <!-- Event Price -->
+            <div class="event-price">
+              ${{ events[currentIndex].price }}
+            </div>
+  
+            <!-- Event Image -->
+            <div class="demo__card__image">
+              <img [src]="events[currentIndex].img" alt="Event image">
+            </div>
+  
+            <div class="demo_card_link">
+              <a [href]="events[currentIndex].link" target="_blank" class="styled-link">View Event</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navigation-buttons">
+      <!-- Profile button -->
+      <div class="button-group">
+        <button class="profile" (click)="goToProfile()">Profile</button>
+        <button class="saved-events" (click)="goToSavedEvents()">Saved Events</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container for when no events are available -->
+  <div *ngIf="events.length === 0" class="no-events-container">
+    <p class="no-events-message">{{ noEventsMessage }}</p>
+    <div class="button-group">
+      <button class="profile" (click)="goToProfile()">Profile</button>
+      <button class="saved-events" (click)="goToSavedEvents()">Saved Events</button>
+    </div>
+  </div>
+</div>

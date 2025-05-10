@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Login Please</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>Username</label>
+    <input type="text" formControlName="username" placeholder="Enter username" />
+
+    <label>Password</label>
+    <input type="password" formControlName="password" placeholder="Enter password" />
+
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  </form>
+
+  <!-- Error message if login fails -->
+  <div *ngIf="loginError" class="error">
+    Invalid username or password.
+  </div>
+</div>

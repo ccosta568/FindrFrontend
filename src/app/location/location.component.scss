@@ -1,0 +1,36 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff8e1; // Soft yellow background
+  }
+  
+  .container {
+    background-color: white;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 1.5rem;
+    color: #4a4a4a;
+  }
+  
+  p {
+    margin-bottom: 1rem;
+    color: #4a4a4a;
+  }
+  
+  .error {
+    color: red;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  

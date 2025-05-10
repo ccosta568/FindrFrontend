@@ -1,0 +1,160 @@
+*,
+*:before,  
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+$w: 30.6rem;
+$h: 54rem;
+$cardW: 24rem;
+$cardH: 32rem;
+$cardTopH: 20.5rem;
+$cardBtmH: $cardH - $cardTopH;
+$imgSize: 10rem;
+
+$bg-color: #fff8e1; // Soft yellow background
+$button-bg-color: #fdbb2d; // Yellow button color
+$button-hover-color: #f9a825; // Darker yellow on hover
+$button-text-color: #4a4a4a; // Button text color
+$card-shadow-color: rgba(0, 0, 0, 0.2);
+
+.container {
+  display: flex;
+  justify-content: center;  // Center horizontally
+  align-items: center;  // Center vertically
+  height: 100vh;  // Take full height of the viewport
+  flex-direction: column;  // Stack child elements vertically
+}
+
+.demo {
+  width: $w;
+  height: $h;
+  position: relative;
+  box-shadow: 0 0.5rem 1rem $card-shadow-color;
+  background-color: $bg-color;
+  padding: 2rem;
+
+  &__content {
+    overflow: hidden;
+    position: relative;
+    padding-top: 1rem;
+    user-select: none;
+  }
+
+  &__card-cont {
+    position: relative;
+    width: $cardW;
+    margin: 0 auto 2.5rem;
+  }
+
+  .event-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+  }
+
+  .event-host{
+    text-align: center;
+  }
+
+  .event-datetime{
+    text-align: center;
+  }
+
+  .event-price {
+  //  display: inline-block; /* Make the div fit the content */
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #28a745; /* Green color for the price */
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: transform 0.2s ease, color 0.3s ease;
+    text-align: center;
+  }
+  
+  
+  .demo_card_link {
+    text-align: center;
+  .styled-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 8px;
+    background-color: #fdbb2d;
+    color: #4a4a4a;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #f9a825;
+      color: white;
+    }
+  }
+}
+
+  .navigation-buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.no-events-container {
+  text-align: center;
+  color: $button-text-color;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+
+  .no-events-message {
+    margin-bottom: 1rem;
+  }
+}
+
+.demo__card__image {
+  width: 100%; /* Make image take full width of the parent container */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 100%; /* Prevent image from stretching beyond container width */
+  max-height: 25rem; /* Set a max height for the image to prevent overflow */
+  object-fit: cover; /* Ensures the image covers the area and doesn't stretch */
+  border-radius: 8px; /* Optional: adds rounded corners to the image */
+  overflow: hidden; /* Ensures image doesn't overflow its container */
+  
+  img {
+    width: 100%; /* Ensure image fills the container */
+    height: 100%; /* Ensure image fills the container */
+    object-fit: cover; /* Cover the container while preserving aspect ratio */
+    border-radius: 8px; /* Optional: adds rounded corners to the image */
+  }
+}
+
+
+// .button-group to handle flexbox alignment of buttons
+.button-group {
+  display: flex;
+  gap: 1rem; // Add space between buttons
+  justify-content: center; // Center the buttons horizontally
+  align-items: center; // Center the buttons vertically
+
+  button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: $button-bg-color;
+    color: $button-text-color;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $button-hover-color;
+      color: white;
+    }
+  }
+}

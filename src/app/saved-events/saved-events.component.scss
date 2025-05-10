@@ -1,0 +1,68 @@
+.event-container {
+  display: flex;
+  justify-content: center;  // Center horizontally
+  align-items: center;  // Center vertically
+  flex-direction: column;  // Stack child elements vertically
+}
+.event-card {
+  width:30.6rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1.5rem; /* Increase padding for better spacing */
+  margin-bottom: 1.5rem; /* Increase bottom margin for spacing between cards */
+  background-color: #fff8e1; /* Soft yellow background */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center; /* Center all text inside the card */
+}
+
+.event-card h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.event-card p {
+  font-size: 1.2rem;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+}
+
+.event-card .event-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0; /* Increased margin for better spacing */
+}
+
+.event-card a {
+  font-size: 1.2rem;
+  color: #fdbb2d; /* Yellow color for the link */
+  text-decoration: none;
+  margin-bottom: 1rem;
+  display: inline-block;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #f9a825; /* Darker yellow on hover */
+  }
+}
+
+.delete-btn {
+  background-color: #fdbb2d; /* Yellow button color */
+  color: #4a4a4a; /* Text color */
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #f9a825; /* Darker yellow when hovered */
+    color: white;
+  }
+}
+
+  

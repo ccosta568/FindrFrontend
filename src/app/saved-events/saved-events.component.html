@@ -1,0 +1,18 @@
+<div class="event-container">
+<div *ngFor="let event of savedEvents" class="event-card">
+  <h3>{{ event.title }}</h3>
+  <p>{{ event.host }}</p>
+  <p class="event-datetime">
+   {{ event.date }} &#64; {{ event.time }}
+  </p>
+  <p>{{ event.price ? ('$' + event.price) : 'Free' }}</p>
+  <img [src]="event.img" [alt]="event.title" class="event-image">
+  <p>
+    <a [href]="event.link" target="_blank" rel="noopener noreferrer">
+      View Event
+    </a>
+  </p>
+  <button (click)="deleteEvent(event.id)" class="delete-btn">Delete</button>
+  </div>
+</div>
+

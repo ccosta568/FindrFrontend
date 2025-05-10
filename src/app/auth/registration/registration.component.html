@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Register</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <label>Username</label>
+    <input type="text" formControlName="username" placeholder="Choose username" />
+
+    <label>Password</label>
+    <input type="password" formControlName="password" placeholder="Create password" />
+
+    <label>Confirm Password</label>
+    <input type="password" formControlName="confirmPassword" placeholder="Confirm password" />
+
+    <!-- Error message for password mismatch -->
+    <div *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.touched">
+      <p class="error">Passwords do not match</p>
+    </div>
+
+    <input type="hidden" formControlName="role" value="USER" />
+
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+</div>
