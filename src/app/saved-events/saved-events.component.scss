@@ -48,6 +48,27 @@
     color: #f9a825; /* Darker yellow on hover */
   }
 }
+//No Events Saved SCSS
+.no-saved-events-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #fdbb2d;
+  border-radius: 1rem;
+  box-shadow:  0 4px 6px rgba(0,0,0,0.1);;
+  width:75vw;
+  margin: 2rem auto;
+
+  .no-saved-events-message {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color:  #4a4a4a;
+    text-align: center;
+  }
+}
+
 
 .delete-btn {
   background-color: #fdbb2d; /* Yellow button color */
@@ -64,5 +85,28 @@
     color: white;
   }
 }
+
+.back-button-group {
+  display: flex;
+  justify-content: center;
+
+  button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #fdbb2d;
+    color: #4a4a4a;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #f9a825;
+      color: white;
+    }
+  }
+}
+
 
   

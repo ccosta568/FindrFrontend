@@ -100,12 +100,21 @@ export class EventsComponent implements OnInit, AfterViewInit {
   }
 
   nextEvent() {
-    if (this.currentIndex < this.events.length - 1) {
-      this.currentIndex++;
-    } else {
-      this.currentIndex = 0;
-    }
-    console.log("After change, currentIndex:", this.currentIndex);
+      if (this.events.length === 0) {
+    this.noEventsMessage = 'Sorry, no new events nearby';
+    return;
+  }
+
+   // Remove the swiped event
+  this.events.splice(this.currentIndex, 1);
+
+  // If there are still events left, reset currentIndex (it’s always 0 now since you remove the current one)
+  if (this.events.length > 0) {
+    this.currentIndex = 0;
+  } else {
+    this.noEventsMessage = 'Sorry, no new events nearby';
+  }
+    console.log("Remaining events:", this.events);
     console.log("Current Event Title:", this.events[this.currentIndex]);
     this.cdr.detectChanges();
   }

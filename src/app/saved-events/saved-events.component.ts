@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoriteService } from '../services/favorite.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-saved-events',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class SavedEventsComponent implements OnInit {
   savedEvents: any[] = [];
 
-  constructor(private favoriteService: FavoriteService) {}
+  constructor(private favoriteService: FavoriteService, private router: Router) {}
 
   ngOnInit() {
     console.log('[SavedEventsComponent] Fetching favorites from backend...');
@@ -23,7 +24,7 @@ export class SavedEventsComponent implements OnInit {
 
         console.log(`[SavedEventsComponent] Received ${events.length} favorites:`);
         events.forEach((e, index) => {
-          console.log(`  #${index + 1} -> ID: ${e.id}, EventLink: ${e.eventLink}, Title: ${e.title}`);
+          console.log(`  #${index + 1} -> ID: ${e.id}, EventID: ${e.eventId}, Title: ${e.title}`);
         });
       },
       error: (err) => {
@@ -31,6 +32,10 @@ export class SavedEventsComponent implements OnInit {
       }
     });
   }
+
+  goToEvents() {
+  this.router.navigate(['/events']);
+}
 
   deleteEvent(eventId: number) {
     this.favoriteService.deleteFavorite(eventId).subscribe({
