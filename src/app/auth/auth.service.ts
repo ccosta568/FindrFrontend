@@ -23,8 +23,7 @@ export interface RegisterRequest {
 })
 export class AuthService {
 //  private baseUrl = 'http://localhost:8080/api/auth';
-    private baseUrl = 'https://findrbackend.onrender.com/api/auth';
-
+  private baseUrl = 'https://api.getfindr.com/api/auth';
   constructor(private http: HttpClient) {}
 
   login(request: LoginRequest): Observable<LoginResponse> {

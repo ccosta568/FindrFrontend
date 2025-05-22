@@ -47,7 +47,9 @@ export class RegistrationComponent {
         console.log('Registering:', request);
     
         // Step 1: Register the user
-        this.http.post('http://localhost:8080/api/auth/register', request, { responseType: 'text' })
+        //Disabled for LocalHost/LocalTesting
+        // this.http.post('http://localhost:8080/api/auth/register', request, { responseType: 'text' })
+          this.http.post('https://api.getfindr.com/api/auth/register', request, { responseType: 'text' })
           .subscribe({
             next: (response) => {
               console.log('Registration success:', response);
@@ -59,7 +61,8 @@ export class RegistrationComponent {
               };
     
               this.http.post<{ username: string, token: string }>(
-                'http://localhost:8080/api/auth/login',
+            //    'http://localhost:8080/api/auth/login',
+                 'https://api.getfindr.com/api/auth/login',
                 loginPayload
               ).subscribe({
                 next: (loginRes) => {

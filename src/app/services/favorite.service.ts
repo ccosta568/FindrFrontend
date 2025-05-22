@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class FavoriteService {
 //  private apiUrl = 'http://localhost:8080/api/favorites'; // Backend URL for favorites
-    private apiUrl = 'https://findrbackend.onrender.com/api/favorites';
+    private apiUrl = 'https://api.getfindr.com/api/favorites';
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 })
 export class DiscardService {
 //  private apiUrl = 'http://localhost:8080/api/discards';
-    private apiUrl = 'https://findrbackend.onrender.com/api/discards';
+    private apiUrl = 'https://api.getfindr.com/api/discards';
 
   constructor(private http: HttpClient) {}
 
