@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService, LoginRequest, LoginResponse } from '../auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 export class RegistrationComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(private fb: FormBuilder, private http: HttpClient,private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -46,32 +47,24 @@ export class RegistrationComponent {
         const { confirmPassword, ...request } = this.registerForm.value;
         console.log('Registering:', request);
     
-        // Step 1: Register the user
-        //Disabled for LocalHost/LocalTesting
-        // this.http.post('http://localhost:8080/api/auth/register', request, { responseType: 'text' })
-          this.http.post('https://api.getfindr.com/api/auth/register', request, { responseType: 'text' })
-          .subscribe({
-            next: (response) => {
-              console.log('Registration success:', response);
+      // Step 1: Register the user using AuthService
+      this.authService.register(request).subscribe({
+        next: (response) => {
+          console.log('Registration success:', response);
     
-              // Step 2: Automatically log in with the same credentials
-              const loginPayload = {
-                username: request.username,
-                password: request.password
-              };
-    
-              this.http.post<{ username: string, token: string }>(
-            //    'http://localhost:8080/api/auth/login',
-                 'https://api.getfindr.com/api/auth/login',
-                loginPayload
-              ).subscribe({
-                next: (loginRes) => {
-                  localStorage.setItem('username', loginRes.username);
-                  localStorage.setItem('token', loginRes.token);
-                  console.log('Auto-login successful. Logged in as:', loginRes.username);
-    
-                  this.router.navigate(['/location']);
-                },
+          // Step 2: Automatically log in with the same credentials
+          const loginPayload: LoginRequest = {
+            username: request.username,
+            password: request.password
+          };
+
+          this.authService.login(loginPayload).subscribe({
+            next: (loginRes: LoginResponse) => {
+              localStorage.setItem('username', loginRes.username);
+              localStorage.setItem('token', loginRes.token);
+              console.log('Auto-login successful. Logged in as:', loginRes.username);
+              this.router.navigate(['/location']);
+            },
                 error: (loginErr) => {
                   console.error('Auto-login failed after registration:', loginErr);
                   this.router.navigate(['/login']); // fallback

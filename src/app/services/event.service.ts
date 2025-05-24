@@ -7,7 +7,7 @@ import { FindrEvent } from '../models/event.model'; // Adjust the import as need
   providedIn: 'root',
 })
 export class EventService {
-//  private baseUrl = 'http://localhost:8080/api/events'; // Your backend URL
+ // private baseUrl = 'http://localhost:8080/api/events'; // Your backend URL
     private baseUrl = 'https://api.getfindr.com/api/events';
 
   constructor(private http: HttpClient) {}
