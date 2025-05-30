@@ -6,8 +6,8 @@ import { catchError, map, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class DiscardService {
- // private apiUrl = 'http://localhost:8080/api/discards';
-    private apiUrl = 'https://api.getfindr.com/api/discards';
+  private apiUrl = 'http://localhost:8080/api/discards';
+ //   private apiUrl = 'https://api.getfindr.com/api/discards';
 
   constructor(private http: HttpClient) {}
 

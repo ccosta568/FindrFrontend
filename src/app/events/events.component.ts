@@ -134,9 +134,11 @@ export class EventsComponent implements OnInit, AfterViewInit {
         let $card: JQuery<HTMLElement>, $cardReject: JQuery<HTMLElement>, $cardLike: JQuery<HTMLElement>;
 
         function pullChange() {
-          animating = true;
-          deg = pullDeltaX / 10;
-          $card.css('transform', `translateX(${pullDeltaX}px) rotate(${deg}deg)`);
+  animating = true;
+  const maxPull = 150; // Maximum allowed horizontal drag in pixels
+  const clampedDeltaX = Math.max(Math.min(pullDeltaX, maxPull), -maxPull);
+  deg = clampedDeltaX / 10;
+  $card.css('transform', `translateX(${clampedDeltaX}px) rotate(${deg}deg)`);
 
           const opacity = pullDeltaX / 100;
           $cardReject.css('opacity', opacity >= 0 ? 0 : Math.abs(opacity));
