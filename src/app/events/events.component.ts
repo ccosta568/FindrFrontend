@@ -32,11 +32,11 @@ export class EventsComponent implements OnInit, AfterViewInit {
     private zone: NgZone,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.zipCode = localStorage.getItem('zipCode') || '';
-  
+    this.zipCode = localStorage.getItem('zipCode') || 'Unable to find Zip';
+
     // Fetch favorite and discarded event IDs
     forkJoin({
       favoriteIds: this.favoriteService.getFavoriteEventIds(),
@@ -45,19 +45,19 @@ export class EventsComponent implements OnInit, AfterViewInit {
       ({ favoriteIds, discardIds }) => {
         // Combine the IDs into a single Set for efficient lookup
         const excludedEventIds = new Set([...favoriteIds, ...discardIds]);
-  
+
         this.eventService.getEvents(this.zipCode).subscribe(
           (data: FindrEvent[]) => {
             if (data?.length) {
               console.log("Raw Event Data:", data);
               console.log("EventID", excludedEventIds);
-  
+
               // Filter out events with IDs in the excludedEventIds Set
               this.events = data.filter(event => !excludedEventIds.has(event.eventId));
-  
+
               this.currentIndex = 0;
 
-              if(this.events.length === 0){
+              if (this.events.length === 0) {
                 this.noEventsMessage = 'Sorry, no new events nearby';
               }
             }
@@ -67,28 +67,7 @@ export class EventsComponent implements OnInit, AfterViewInit {
           }
         );
       },
-      (error) => {
-        console.error('Error fetching event IDs:', error);
-      }
     );
-  }
-
-  getLocation() {
-    fetch('https://ipapi.co/json/')
-      .then(res => res.json())
-      .then(data => {
-        this.zipCode = data.postal;
-        console.log('ZIP from IP:', this.zipCode);
-        this.locationFetched = true;
-        setTimeout(() => this.router.navigate(['/events']), 1000);
-      })
-      .catch(err => {
-        console.error('ZIP error:', err);
-        this.errorMessage = 'Could not determine your ZIP code.';
-        this.zipCode = 'Unknown';
-        this.locationFetched = true;
-        this.router.navigate(['/events']);
-      });
   }
 
   goToProfile() {
@@ -100,20 +79,20 @@ export class EventsComponent implements OnInit, AfterViewInit {
   }
 
   nextEvent() {
-      if (this.events.length === 0) {
-    this.noEventsMessage = 'Sorry, no new events nearby';
-    return;
-  }
+    if (this.events.length === 0) {
+      this.noEventsMessage = 'Sorry, no new events nearby';
+      return;
+    }
 
-   // Remove the swiped event
-  this.events.splice(this.currentIndex, 1);
+    // Remove the swiped event
+    this.events.splice(this.currentIndex, 1);
 
-  // If there are still events left, reset currentIndex (it’s always 0 now since you remove the current one)
-  if (this.events.length > 0) {
-    this.currentIndex = 0;
-  } else {
-    this.noEventsMessage = 'Sorry, no new events nearby';
-  }
+    // If there are still events left, reset currentIndex (it’s always 0 now since you remove the current one)
+    if (this.events.length > 0) {
+      this.currentIndex = 0;
+    } else {
+      this.noEventsMessage = 'Sorry, no new events nearby';
+    }
     console.log("Remaining events:", this.events);
     console.log("Current Event Title:", this.events[this.currentIndex]);
     this.cdr.detectChanges();
@@ -129,16 +108,16 @@ export class EventsComponent implements OnInit, AfterViewInit {
         let deg = 0;
         const decisionVal = 80;
 
-        let alreadySwiped = false; // ✨ CHANGED: guard to prevent double save
+        let alreadySwiped = false; // guard to prevent double save
 
         let $card: JQuery<HTMLElement>, $cardReject: JQuery<HTMLElement>, $cardLike: JQuery<HTMLElement>;
 
         function pullChange() {
-  animating = true;
-  const maxPull = 150; // Maximum allowed horizontal drag in pixels
-  const clampedDeltaX = Math.max(Math.min(pullDeltaX, maxPull), -maxPull);
-  deg = clampedDeltaX / 10;
-  $card.css('transform', `translateX(${clampedDeltaX}px) rotate(${deg}deg)`);
+          animating = true;
+          const maxPull = 150; // Maximum allowed horizontal drag in pixels
+          const clampedDeltaX = Math.max(Math.min(pullDeltaX, maxPull), -maxPull);
+          deg = clampedDeltaX / 10;
+          $card.css('transform', `translateX(${clampedDeltaX}px) rotate(${deg}deg)`);
 
           const opacity = pullDeltaX / 100;
           $cardReject.css('opacity', opacity >= 0 ? 0 : Math.abs(opacity));
@@ -149,7 +128,7 @@ export class EventsComponent implements OnInit, AfterViewInit {
           if (Math.abs(pullDeltaX) >= decisionVal) {
             $card.addClass(pullDeltaX > 0 ? 'to-right' : 'to-left');
 
-            // ✨ CHANGED: Guard against duplicate saves
+            // Guard against duplicate saves
             if (pullDeltaX > 0 && !alreadySwiped) {
               alreadySwiped = true;
 
@@ -161,20 +140,20 @@ export class EventsComponent implements OnInit, AfterViewInit {
               });
             }
 
-             // Handle the swipe left (discard) logic
-             if (pullDeltaX < 0 && !alreadySwiped) {
+            // Handle the swipe left (discard) logic
+            if (pullDeltaX < 0 && !alreadySwiped) {
               alreadySwiped = true;
 
               component.zone.run(() => {
                 const eventToDiscard = component.events[component.currentIndex];
-                component.discardService.handleDiscard(eventToDiscard); 
+                component.discardService.handleDiscard(eventToDiscard);
               });
             }
 
             setTimeout(() => {
               $card.addClass('below').removeClass('inactive to-left to-right');
               component.nextEvent();
-              alreadySwiped = false; // ✨ CHANGED: reset guard after card change
+              alreadySwiped = false; // reset guard after card change
             }, 300);
           } else {
             $card.addClass('reset');
